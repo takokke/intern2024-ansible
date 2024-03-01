@@ -1,0 +1,36 @@
+---
+- name: Update apt
+  become: yes
+  apt: update_cache=yes
+
+- name: Install mysql-server
+  become: yes
+  apt: pkg=mysql-server state=latest
+
+- name: Install php-mysqli
+  become: yes
+  apt: pkg=php-mysqli state=latest
+
+- name: Install mysql-client
+  become: yes
+  apt: pkg=mysql-client state=latest
+
+- name: Install python3-mysqldb
+  become: yes
+  apt: pkg=python3-mysqldb state=latest
+
+- name: Create DB
+  mysql_db:
+    name: "{{ mysql_database }}"
+
+- name: Add user
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_user_password }}"
+    priv: '{{ mysql_database }}.*:ALL'
+
+- name: Restart mysql 
+  service:
+    name: mysql
+    enabled: yes
+    state: restarted

@@ -1,0 +1,27 @@
+---
+- name: Update apt
+  become: yes
+  apt: update_cache=yes
+
+- name: Install php
+  become: yes
+  apt: pkg=php state=latest
+
+- name: Delete apache2
+  become: yes
+  ansible.builtin.apt:
+    name: apache2
+    purge: yes
+    state: absent
+
+- name: Install php-fpm
+  become: yes
+  apt: pkg=php-fpm state=latest
+
+- name: Install php-mbstring
+  become: yes
+  apt: pkg=php-mbstring state=latest
+
+- name: Install webp
+  become: yes
+  apt: pkg=webp state=latest
