@@ -35,6 +35,11 @@ $ vim ~/.ssh/authorized_keys
 ```
 先ほどコピーした公開鍵の中身をペーストして登録完了です。
 
+・ssh通信を更新
+```
+sudo systemctl restart sshd
+```
+
 ## Ansibleの設定を仮想マシンに流し込む
 playbook.ymlを以下の通りに編集します
 ```
